@@ -5,11 +5,20 @@ import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:bmi_calculator/components/bottom_button.dart';
 
 class ResultPage extends StatelessWidget {
+  ResultPage(
+      {@required this.interpretation,
+      @required this.bmiResult,
+      @required this.resultText});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR 2'),
+        title: Text('BMI CALCULATOR'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch, // penuhkan ruang
@@ -19,9 +28,9 @@ class ResultPage extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(15),
               alignment: Alignment.bottomLeft,
-              child: Text(''
-                  'Your Result',
-                  style: kTitleTextStyle,
+              child: Text(
+                'Your Result',
+                style: kTitleTextStyle,
               ),
             ),
           ),
@@ -34,25 +43,24 @@ class ResultPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                      'Normal',
-                      style: kResultTextStyle,
+                    resultText.toUpperCase(),
+                    style: kResultTextStyle,
                   ),
                   Text(
-                    '18.3',
+                    bmiResult,
                     style: kBMITextStyle,
                   ),
-                  Text(
-                    'Your BMI result is quite low, you should eat more!',
-                    textAlign: TextAlign.center,
-                    style: kBodyTextStyle
-                  )
+                  Text(interpretation,
+                      textAlign: TextAlign.center, style: kBodyTextStyle)
                 ],
               ),
             ),
           ),
-          BottomButton(onTap: (){
-            Navigator.pop(context);
-          }, buttonTitle: 'RE-CALCULATE')
+          BottomButton(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              buttonTitle: 'RE-CALCULATE')
         ],
       ),
     );
